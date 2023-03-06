@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="cont">
+        <p class="title">Faça o calculo do seu absenteismo!</p>
+
+        <div class="col">
+            <div class="row">
+                <div class="divIpt">
+                    <p class="txtIpt">Numero do Colaboradores</p>
+                    <input id="iptColaboradores">
+                </div>
+                <div class="divIpt">
+                    <p class="txtIpt">Horas trabalhadas</p>
+                    <input id="iptHorasDia">
+                </div>
+            </div>
+            <div class="row">
+                <div class="divIpt">
+                    <p class="txtIpt">Horas Dias Uteis no mês</p>
+                    <input id="iptDiasUteis">
+                </div>
+                <div class="divIpt">
+                    <p class="txtIpt">Horas Perdidas por mês</p>
+                    <input id="iptHorasPerdidas">
+                </div>
+            </div>
+        </div>
+
+        <button onclick="calc()" class="btnCalc">
+            <p class="btnText">Calcular</p>
+        </button>
+    </div>
+    <div id="modal">
+        <div class="modalArea">
+            <button class="modalClose" onclick="closeModal()">X Fechar</button>
+            <p class="modalTitle">A porcentagem de absenteismo em sua empresa é de:</p>
+            <p id="mensagem">0 %</p>
+        </div>
+    </div>
+</body>
+
+</html>
+
+<script>
+    const modal = document.getElementById('modal')
+    const mensagem = document.getElementById('mensagem')
+
+    const numColaboradores = document.getElementById('iptColaboradores')
+    const horasDia = document.getElementById('iptHorasDia')
+    const diasUteis = document.getElementById('iptDiasUteis')
+    const horaPerdidas = document.getElementById('iptHorasPerdidas')
+
+    function calc() {
+        const horasMes = Number(numColaboradores.value) * Number(horasDia.value) * Number(diasUteis.value)
+        const totalAbsenteismo = Number(horaPerdidas.value) / horasMes * 100
+
+
+        modal.style.display = 'flex'
+        if(!isNaN(totalAbsenteismo))
+            mensagem.innerText = `${totalAbsenteismo.toFixed(2)} %`
+        else
+            mensagem.innerText = '0 %'
+    }   
+
+    function closeModal(){
+        modal.style.display = 'none'
+    }
+</script>
